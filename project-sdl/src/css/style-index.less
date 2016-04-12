@@ -1,0 +1,139 @@
+/**
+ * @name: Test Project
+ * @description: This is a demo use of `Gulp Workflow`
+ * @author: littledu
+ */
+
+/* Import Less files */
+
+@import "lib-mixins";
+@import "lib-reset";
+@import "lib-animation";
+
+/* Import lib-rem.less if supportREM opened. */
+/* @import "lib-rem"; */
+
+/* Import modules like `header.less` */
+
+// @import "header";
+@import "tips";
+
+@iphone4like: ~"only screen and (max-height: 480px)";
+
+html, body {
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #62c6de;
+}
+
+.loading{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #62c6de;
+}
+
+.loading__inner{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -35px;
+    margin-top: -16px;
+    width: 70px;
+    height: 39px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    background-color: #62c6de;
+}
+
+.loading__img{
+    width: 70px;
+    height: 39px;
+    background: url(../img/loading.png) no-repeat;
+    background-size: 70px auto;
+}
+
+.loading-num{
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    width: 100%;
+    text-align: center;
+}
+.wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #62c6de;
+    background-image: url(../img/blue_bg.png);
+
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.screen__inner,#canvas {
+    position: absolute;
+    width: 320px;
+    height: 504px;
+    top: 50%;
+    left: 50%;
+    margin: -252px 0 0 -160px;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    overflow: hidden;
+}
+
+
+.screen__bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+
+.screen1__pic1{
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    width: 140px/2;
+    height:78px/2;
+    background: url(../img/logo.png) no-repeat;
+    .background-size(140px/2);
+    opacity: 0;
+}
+
+.screen1__pic2{
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    width: 252px/3;
+    height: 253px/3;
+
+
+    // background: url(../img/qr-sdl.jpg) no-repeat;
+    // .background-size(252px/2);
+    opacity: 0;
+    // @media @iphone4like {
+    //   right:auto;
+    //   left:10px;
+    // }
+
+
+}
+.screen1__pic1{
+    .animation(fade-in 1.5s 1.5s ease both);
+}
+.screen1__pic2{
+    .animation(fade-in 1.5s 3.5s ease both);
+}

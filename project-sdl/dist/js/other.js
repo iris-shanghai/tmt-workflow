@@ -1,0 +1,1 @@
+$(document).ready(function(){function n(n,r){var c,i=t/e,o=320/504;i>o?(c=e/504,c=504>=e?1:t/320):c=t/320,$(n).css({"-webkit-transform-origin":r,"transform-origin":r,"-webkit-transform":"scale("+c+");",transform:"scale("+c+");"})}var e=document.documentElement.clientHeight,t=document.documentElement.clientWidth;n(".screen__inner","center"),n("#canvas","center"),init()});
