@@ -291,8 +291,9 @@ Config.preloading=function(arr)
         if(loader.hasEventListener('complete')) loader.removeEventListener("complete", movieJsHandleComplete);
         loader.addEventListener("complete", movieJsHandleComplete);
         //loader.loadFile({src:Config.path+arr[currentPage][0]},true);
+        // var folder = arr[currentPage][0].replace(".js", "");
         var url=arr[currentPage][0]+'?rnd='+String(Math.random()*100>>0);
-        console.log('loadFile:',url);
+        console.log('loadFile:',url,arr);
         loader.loadFile({src:url},true);
     }
 

@@ -16,7 +16,7 @@ var paths = {
         dir: './src',
         img: './src/img/**/*.{JPG,jpg,png,gif}',
         slice: './src/slice/**/*.png',
-        js: './src/js/**/*.js',
+        js: './src/js/**/*.{js,json}',
         media: './src/media/**/*',
         less: './src/css/style-*.less',
         lessAll: './src/css/**/*.less',

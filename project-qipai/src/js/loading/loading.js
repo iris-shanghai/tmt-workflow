@@ -9,7 +9,7 @@ lib.properties = {
 	fps: 30,
 	color: "#003300",
 	manifest: [
-		{src:"images/loading/loadingbg.jpg", id:"loadingbg"}
+		{src:"/img/loading/loadingbg.jpg", id:"loadingbg"}
 	]
 };
 

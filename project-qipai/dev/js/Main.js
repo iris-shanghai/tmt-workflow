@@ -24,10 +24,10 @@ function Main()
     this.dataArr=
         [
             {id:'loading',childIndex:0,atlas:1,src:[
-                {src:'sounds/keyboard.mp3',id:'keyboard'}
+                {src:'../media/keyboard.mp3',id:'keyboard'}
             ]},
             {id:'library',childIndex:0,atlas:1,src:[
-                {src:'sounds/bg.mp3',id:'bgSound'}
+                {src:'../media/bg.mp3',id:'bgSound'}
 
             ]},
             {id:'p0',childIndex:1,atlas:3,src:[
@@ -64,7 +64,7 @@ function Main()
         ];
     this.setSource(this.dataArr);
 
-    this.onPlayEnd=function (mc)//������������,�˴������ӹ�����������;
+    this.onPlayEnd=function (mc)//场景播放完成,此处可添加过场交互操作;
     {
         //this.clickShapeEnabled(true);
         console.log('onPlayEnd:',mc.pageId,mc.getChildAt(0).totalFrames);
@@ -72,21 +72,21 @@ function Main()
         if(mc.pageId==2||mc.pageId==4||mc.pageId==5||mc.pageId==6||mc.pageId==7)
         {
             setTimeout(function(){
-                target.loadingAndTransitionsComplete();//�����Ͽ����¸�����,�����������ȶ���;
+                target.loadingAndTransitionsComplete();//不马上开启下个场景,开启场景过度动画;
                 setTimeout(function(){
-                    if(mc.pageId!=7) target.getContainer('content').removeChild(mc);//�˳�����֮����Ҫ�Ե�ǰ�������д���,��ֱ���Ƴ�,���ǲ���һ��ʱ��֮�����Ƴ�;
+                    if(mc.pageId!=7) target.getContainer('content').removeChild(mc);//退场完成之后需要对当前场景进行处理,是直接移除,还是播放一段时间之后再移除;
                 },800);
             },timeArr[mc.pageId]);
         }
         else if(mc.pageId==3)
         {
             setTimeout(function(){
-                target.getContainer('content').removeChild(mc);//�˳�����֮����Ҫ�Ե�ǰ�������д���,��ֱ���Ƴ�,���ǲ���һ��ʱ��֮�����Ƴ�;
+                target.getContainer('content').removeChild(mc);//退场完成之后需要对当前场景进行处理,是直接移除,还是播放一段时间之后再移除;
             },800);
 
             target.currentPage+=1;
             target.addScenes('content',target.currentPage);
-            target.onScenesOutComplete('content');//�˳����ɱ���֪ͨ���øú���;
+            target.onScenesOutComplete('content');//退场完成必须通知调用该函数;
         }
     }
 
@@ -234,7 +234,7 @@ function Main()
 
     this.pageInit=function()
     {
-        this.getMc(1);//�������⶯��;
+        this.getMc(1);//组成类库动画;
         //this.addLoading();
         this.addShare();
         this.loadingAndTransitionsComplete();
@@ -268,11 +268,11 @@ function Main()
             {
                 if(mc.word_mc)
                 {
-                    if(mc.word_mc.currentFrame==mc.word_mc.totalFrames-1)//������ʾ����;
+                    if(mc.word_mc.currentFrame==mc.word_mc.totalFrames-1)//文字显示完成;
                     {
-                        cjs.Tween.removeTweens(mc);//ֹͣtween����,������Ӱ��ʱ��������;
+                        cjs.Tween.removeTweens(mc);//停止tween缓动,否则会影响时间轴控制;
                     }
-                    else//������δ��ʾ����;
+                    else//文字尚未显示完成;
                     {
                         target.addFrameScript(mc.word_mc,mc.word_mc.totalFrames-1,function()
                         {
@@ -326,7 +326,7 @@ function Main()
                         target.currentPage+=1;
                     }
                     target.addScenes('content',target.currentPage);
-                    target.onScenesOutComplete('content');//�˳����ɱ���֪ͨ���øú���;
+                    target.onScenesOutComplete('content');//退场完成必须通知调用该函数;
                 }
                 mc.stop();
                 if(loadingPage<=5) target.getContainer('content').removeChild(mc.parent.parent);
@@ -374,7 +374,7 @@ function Main()
                 mc.parent.play();
                 //target.currentPage=2;
                 //target.addScenes('content',target.currentPage);
-                //target.onScenesOutComplete('content');//�˳����ɱ���֪ͨ���øú���;
+                //target.onScenesOutComplete('content');//退场完成必须通知调用该函数;
                 mc.removeEventListener('click',onClick);
                 break;
             case 'shareClose_mc':
@@ -411,12 +411,12 @@ function Main()
 }
 cjs.extend(Main,Core);
 var mainP=Main.prototype;
-mainP.onLoadProgressHandler=function(pro)//��ҳloading����;
+mainP.onLoadProgressHandler=function(pro)//主页loading进度;
 {
     console.log('Main onLoadProgressHandler:', pro);
     divLoadProgress(pro*100>>0);
 }
-mainP.onLoadCompleteHandler=function(e)//��ҳloading��������;
+mainP.onLoadCompleteHandler=function(e)//主页loading加载完成;
 {
     console.log('Main onLoadCompleteHandler');
     this.loadingInit(e);
@@ -431,35 +431,35 @@ mainP.onPageLoadingCompleteHandler=function(e)
     console.log('onPageLoadingCompleteHandler');
     this.pageInit();
 }
-mainP.onPreLoadingProgressHandler=function(pro)//Ԥ����loading,��Ҫ�¸�����,�ó�����������,��Ҫ��ʾloading;
+mainP.onPreLoadingProgressHandler=function(pro)//预加载loading,需要下个场景,该场景正在下载,需要显示loading;
 {
     this.loadingEnabled(true);
     console.log('onPreLoadingProgressHandler:',pro);
 }
-mainP.onPreLoadingCompleteHandler=function(e)//Ԥ�ظó�������,��Ҫ������ʾ;
+mainP.onPreLoadingCompleteHandler=function(e)//预载该场景完成,需要立刻显示;
 {
     console.log('onPreLoadingCompleteHandler: play');
     this.loadingEnabled(false);
     this.transitionMc.play();
-    this.onScenesOutComplete('content');//�˳����ɱ���֪ͨ���øú���;
+    this.onScenesOutComplete('content');//退场完成必须通知调用该函数;
 }
-mainP.onScenesPlayEnd=function(mc)//������������;
+mainP.onScenesPlayEnd=function(mc)//场景播放完成;
 {
     //console.log('onScenesPlayEnd',mc.totalFrames);
     this.onPlayEnd(mc);
 }
-mainP.onScenesIn=function(mc)//��������;
+mainP.onScenesIn=function(mc)//场景进场;
 {
     //mc.getChildAt(0).gotoAndPlay(1);
     //this.clickShapeEnabled(true);
 }
-mainP.onScenesOut=function(mc)//�����˳�;
+mainP.onScenesOut=function(mc)//场景退场;
 {
     //cjs.Tween.get(mc).to({alpha:0}, 800).call(handleComplete);
     var target=this;
     target.clickShapeEnabled(false);
 
-    //�ڸú�����������ִ��;
+    //在该函数体内最后执行;
     handleComplete();
     function handleComplete() {
         //Tween complete
@@ -468,16 +468,16 @@ mainP.onScenesOut=function(mc)//�����˳�;
         if(mc.pageId==2||mc.pageId==4||mc.pageId==5||mc.pageId==6)
         {
             setTimeout(function(){
-                target.getContainer('content').removeChild(mc);//�˳�����֮����Ҫ�Ե�ǰ�������д���,��ֱ���Ƴ�,���ǲ���һ��ʱ��֮�����Ƴ�;
+                target.getContainer('content').removeChild(mc);//退场完成之后需要对当前场景进行处理,是直接移除,还是播放一段时间之后再移除;
             },800);
-            target.loadingAndTransitionsComplete();//�����Ͽ����¸�����,�����������ȶ���;
+            target.loadingAndTransitionsComplete();//不马上开启下个场景,开启场景过度动画;
         }
         else if(mc.pageId==3)
         {
             setTimeout(function(){
-                target.getContainer('content').removeChild(mc);//�˳�����֮����Ҫ�Ե�ǰ�������д���,��ֱ���Ƴ�,���ǲ���һ��ʱ��֮�����Ƴ�;
+                target.getContainer('content').removeChild(mc);//退场完成之后需要对当前场景进行处理,是直接移除,还是播放一段时间之后再移除;
             },800);
-            target.onScenesOutComplete('content');//�˳����ɱ���֪ͨ���øú���;
+            target.onScenesOutComplete('content');//退场完成必须通知调用该函数;
         }
         */
     }
