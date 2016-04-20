@@ -901,19 +901,46 @@ body {
   height: 100%;
   overflow: hidden;
   position: relative;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 
 .screen__inner,
-#canvas {
+#canvas,
+#WxMomentVideo,
+#videoTrigger {
   position: absolute;
   width: 320px;
   height: 504px;
   top: 50%;
   left: 50%;
   margin: -252px 0 0 -160px;
+  overflow: hidden;
   -webkit-perspective: 1000;
   perspective: 1000;
-  overflow: hidden;
+}
+
+#videoTrigger,
+#WxMomentVideo {
+  background-image: url(../img/video-thumb.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: 320px;
+  -moz-background-size: 320px;
+  -o-background-size: 320px;
+  background-size: 320px;
+}
+
+#videoTrigger {
+  width: 320px;
+  height: 207px;
+  margin-top: -103px;
+}
+
+#WxMomentVideo {
+  height: 1px;
+  width: 1px;
+  margin-top: -100px;
 }
 
 .screen__bg {
@@ -927,35 +954,105 @@ body {
 
 .screen1__pic1 {
   position: absolute;
-  left: 10px;
-  top: 30px;
-  width: 70px;
+  left: 0px;
+  bottom: 25px;
+  width: 100%;
   height: 39px;
-  background: url(../img/logo.png) no-repeat;
-  -webkit-background-size: 70px;
-  -moz-background-size: 70px;
-  -o-background-size: 70px;
-  background-size: 70px;
   opacity: 0;
+  text-align: center;
+  font-size: 12px;
 }
 
 .screen1__pic2 {
   position: absolute;
-  left: 10px;
-  bottom: 5px;
-  width: 84px;
-  height: 84.33333333px;
+  right: 2%;
+  bottom: 8%;
+  width: 60px;
+  height: 60px;
   opacity: 0;
 }
 
-.screen1__pic1 {
+.screen2__pic1 {
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  margin-left: -60px;
+  width: 120px;
+  height: 78px;
+  background: url(../img/loading.png) no-repeat;
+  -webkit-background-size: 120px;
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  background-size: 120px;
+}
+
+.screen2__pic2 {
+  position: absolute;
+  left: 0%;
+  top: 19%;
+  width: 100%;
+  color: #0d3d65;
+  font-weight: bold;
+  text-align: center;
+}
+
+.screen2__pic3 {
+  position: absolute;
+  left: 25%;
+  bottom: 7%;
+  width: 97px;
+  height: 47.5px;
+  background: url(../img/txt1.png) no-repeat;
+  background-size: 97px;
+}
+
+.screen2__pic4 {
+  position: absolute;
+  right: 18%;
+  bottom: 8%;
+  width: 75px;
+  height: 75px;
+}
+
+.screen2__pic5 {
+  position: absolute;
+  left: 14%;
+  bottom: 11%;
+  width: 97px;
+  height: 47.5px;
+  background: url(../img/txt2.png) no-repeat;
+  background-size: 97px;
+}
+
+.screen-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: 80px;
+  width: 33px;
+  height: 18px;
+  margin-left: -16.5px;
+  background: url(../img/screen_arrow.png) no-repeat;
+  opacity: 0;
+  -webkit-background-size: 33px;
+  -moz-background-size: 33px;
+  -o-background-size: 33px;
+  background-size: 33px;
+}
+
+.current .screen-arrow {
+  -webkit-animation: swipeMove 1.5s 1s ease infinite;
+  -moz-animation: swipeMove 1.5s 1s ease infinite;
+  animation: swipeMove 1.5s 1s ease infinite;
+}
+
+.current .screen1__pic1 {
   -webkit-animation: fade-in 1.5s 1.5s ease both;
   -moz-animation: fade-in 1.5s 1.5s ease both;
   animation: fade-in 1.5s 1.5s ease both;
 }
 
-.screen1__pic2 {
-  -webkit-animation: fade-in 1.5s 3.5s ease both;
-  -moz-animation: fade-in 1.5s 3.5s ease both;
-  animation: fade-in 1.5s 3.5s ease both;
+.current .screen1__pic2 {
+  -webkit-animation: fade-in 1.5s 1.5s ease both;
+  -moz-animation: fade-in 1.5s 1.5s ease both;
+  animation: fade-in 1.5s 1.5s ease both;
 }

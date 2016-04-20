@@ -36,6 +36,8 @@ $(document).ready(function() {
 
   scaleEle(".screen__inner", "center");
   scaleEle("#canvas", "center");
+  // scaleEle("#WxMomentVideo", "center");
+  // scaleEle("#videoTrigger", "center");
 
   init();
 
