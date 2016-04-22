@@ -130,6 +130,7 @@ module.exports = function (gulp, config) {
   //JS 压缩
   function uglifyJs() {
     return gulp.src(paths.src.js, {base: paths.src.dir})
+      // .pipe(gulpif('*.js',uglify()))
       .pipe(uglify())
       .pipe(gulp.dest(paths.tmp.dir));
   }

@@ -11,7 +11,7 @@ var wa = new WxMoment.Analytics({
 
 var video = new WxMoment.Video({
 
-    vid: "t0195fsw197",
+    vid: "t00205dg75w",
     pic: "http://wximg.qq.com/wxp/moment/V1X7aTACe/img/video-thumb.jpg",
     oninited: function () {
     },
